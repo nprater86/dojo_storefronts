@@ -1,0 +1,7 @@
+@using Microsoft.AspNetCore.Http;
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1 class="display-4 mt-5">Hello, @Context.Session.GetString("UserName")!</h1>

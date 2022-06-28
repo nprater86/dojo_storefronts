@@ -1,0 +1,39 @@
+@model LogUser;
+
+<form asp-action="Login" asp-controller="User">
+    <div class="row">
+        <div class="col-3">
+            <label class="col-form-label" asp-for="LogEmail"></label>
+        </div>
+        <div class="col-5">
+            <input class="form-control" asp-for="LogEmail">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-3">
+        </div>
+        <div class="col">
+            <small><span class="text-danger" asp-validation-for="LogEmail"></span></small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <label class="col-form-label" asp-for="LogPassword"></label>
+        </div>
+        <div class="col-5">
+            <input class="form-control" asp-for="LogPassword">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-3">
+        </div>
+        <div class="col">
+            <small><span class="text-danger" asp-validation-for="LogPassword"></span></small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-8 text-end">
+            <input class="btn btn-primary" type="submit" value="Login">
+        </div>
+    </div>
+</form>

@@ -1,0 +1,97 @@
+@{
+    ViewData["Title"] = "Account";
+}
+
+<h1 class="display-4 mt-5 mb-5">User Account:</h1>
+<div class="row w-100 justify-content-between align-items-center mb-3">
+    <div class="col-4">
+        <h1 class="display-6 mb-3">User Name: </h1>
+    </div>
+    <div class="col-5">
+        <h1 class="display-6 mb-3">@ViewBag.User.UserName</h1>
+    </div>
+</div>
+<div class="row w-100 justify-content-between align-items-center mb-3">
+    <div class="col-4">
+        <h1 class="display-6 mb-3">Email: </h1>
+    </div>
+    <div class="col-5">
+        <h1 class="display-6 mb-3">@ViewBag.User.Email</h1>
+    </div>
+</div>
+<div class="row w-100 justify-content-between align-items-center mb-3">
+    <div class="col-4 align-self-start">
+        <h1 class="display-6 mb-3">Shipping Address(es): </h1>
+    </div>
+    <div class="col-5 d-flex flex-column">
+        <a class="align-self-end mb-2" href="/addresses/add">Add Shipping Address</a>
+        @{
+            if(ViewBag.User.UserAddresses.Count == 0)
+            {
+                <p>You don't have any saved payment methods.</p>
+            }
+            else
+            {
+                foreach(var address in ViewBag.User.UserAddresses)
+                {
+                    <div class="row border rounded p-2 address mb-2 justify-content-between">
+                        <div class="col-6">
+                            <p><strong>@address.Name</strong></p>
+                            <p>@address.NameOnPackage</p>
+                            <p>@address.Address1</p>
+                            @{
+                                if(address.Address2 != null)
+                                {
+                                    <p>@address.Address2</p>
+                                }
+                            }
+                            <p>@address.City, @address.State @address.Zipcode</p>
+                        </div>
+                        <div class="col-auto align-self-end">
+                            <a class="text-end" href="/addresses/@address.ShippingAddressId/delete">Delete</a>
+                        </div>
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>
+<div class="row w-100 justify-content-between align-items-center">
+    <div class="col-4 align-self-start">
+        <h1 class="display-6 mb-3">Payment Method(s): </h1>
+    </div>
+    <div class="col-5 d-flex flex-column">
+        <a class="align-self-end mb-2" href="/payments/add">Add Payment Method</a>
+        @{
+            if(ViewBag.User.UserPayments.Count == 0)
+            {
+                <p>You don't have any saved Payment Method(s).</p>
+            }
+            else
+            {
+                foreach(var payment in ViewBag.User.UserPayments)
+                {
+                    <div class="row border rounded p-2 address mb-2 justify-content-between">
+                        <div class="col-8">
+                            <p><strong>@payment.Name</strong></p>
+                            <p>Name on Card: @payment.NameOnCard</p>
+                            <p>@payment.Company</p>
+                            <p>****-****-****-@payment.Number.Substring(12)</p>
+                            <div class="row">
+                                <div class="col-auto">
+                                    <p>Exp: @payment.Expiration.ToString("MM/yy")</p>
+                                </div>
+                                <div class="col-auto">
+                                    <p>Zip: @payment.Zipcode</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto align-self-end">
+                            <a class="text-end" href="/payments/@payment.PaymentId/delete">Delete</a>
+                        </div>
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>

@@ -1,0 +1,57 @@
+@model Product;
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <h1 class="display-4 mt-5">Edit Product:</h1>
+    </div>
+    <div class="col-3"></div>
+</div>
+<div class="row w-100 justify-contents-center">
+    <div class="col-3">
+    </div>
+    <div class="col-6">
+        <form asp-action="UpdateProduct" asp-controller="Product">
+            <input type="hidden" asp-for="ProductId">
+            <div class="row mb-3">
+                <label class="form-label" asp-for="Name">Product Name:</label>
+                <div class="input-group">
+                    <input class="form-control" asp-for="Name">
+                </div>
+                <small><span class="text-danger" asp-validation-for="Name"></span></small>
+            </div>
+            <div class="row mb-3">
+                <label class="form-label" asp-for="Description">Product Description:</label>
+                <div class="input-group">
+                    <textarea class="form-control" style="resize:none;" asp-for="Description" rows=5></textarea>
+                </div>
+                <small><span class="text-danger" asp-validation-for="Description"></span></small>
+            </div>
+            <div class="row mb-3">
+                <label class="form-label" asp-for="Price">Price:</label>
+                <div class="input-group">
+                    <div class="input-group-text">$</div>
+                    <input type="number" class="form-control" asp-for="Price" step="0.01">
+                </div>
+                <small><span class="text-danger" asp-validation-for="Price"></span></small>
+            </div>
+            <div class="row mb-3">
+                <label class="form-label" asp-for="Quantity">Quantity:</label>
+                <div class="input-group">
+                    <input class="form-control" asp-for="Quantity" step="1">
+                </div>
+                <small><span class="text-danger" asp-validation-for="Quantity"></span></small>
+            </div>
+            <div>
+                <input class="btn btn-secondary" type="submit" value="Update">
+                <a class="btn btn-danger" href="/storefront/mystorefront">Cancel</a>
+            </div>
+        </form>
+    </div>
+    <div class="col-3">
+    </div>
+</div>

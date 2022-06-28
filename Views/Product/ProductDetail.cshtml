@@ -1,0 +1,21 @@
+@model Product;
+
+@{
+    ViewData["Title"] = "@Model.Name";
+}
+
+<div class="row mt-5">
+    <div class="col-8 d-flex flex-column gap-3">
+        <img class="img-thumbnail" style="width: 300px; height: auto;" src="~/images/No_image_available.png">
+        <h1 class="display-4">@Model.Name</h1>
+        <h1 class="display-6">Description:</h1>
+        <p class="mb-3">@Model.Description</p>
+        <h1 class="display-6">Price: $@Model.Price.ToString("#.##")</h1>
+    </div>
+    <div class="col-2 d-flex flex-column text-end">
+        <a href="/cart/add/@Model.ProductId">Add to Cart</a>
+        <script>
+            document.write('<a href="' + document.referrer + '">Go Back</a>');
+        </script>
+    </div>
+</div>

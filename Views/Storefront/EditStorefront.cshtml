@@ -1,0 +1,47 @@
+@model Storefront;
+
+@{
+    ViewData["Title"] = "Edit Storefront";
+}
+
+<h1 class="display-4 mb-5">Edit Storefront</h1>
+<form asp-action="UpdateStorefront" asp-controller="Storefront">
+    <input type="hidden" asp-for="StorefrontId" value="@Model.StorefrontId">
+    <div class="row">
+        <div class="col-3">
+            <label class="col-form-label" asp-for="Title">Title:</label>
+        </div>
+        <div class="col-4">
+            <input class="form-control" asp-for="Title">
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-3">
+        </div>
+        <div class="col-4">
+            <small><span class="text-danger" asp-validation-for="Title"></span></small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <label class="col-form-label" asp-for="Description">Description:</label>
+        </div>
+        <div class="col-4">
+            <textarea class="form-control" style="resize: none;" asp-for="Description" rows="10"></textarea>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-3">
+        </div>
+        <div class="col-4">
+            <small><span class="text-danger" asp-validation-for="Description"></span></small>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-4 d-flex justify">
+            <input class="btn btn-secondary" type="submit" value="Update">
+        </div>
+    </div>
+</form>

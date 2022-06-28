@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "Browse Storefronts";
+}
+
+<div class="row mt-5 mb-3">
+    <div class="col-2">
+
+    </div>
+    <div class="col-10">
+        <h1 class="display-4">Browse Storefronts</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-2">
+        <p class="mb-1">Search:</p>
+        <input class="form-control mb-1" type="text">
+        <input class="btn btn-primary" type="submit" value="Filter">
+    </div>
+    <div class="col-10">
+        <table class="table table-striped">
+            <thead>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Creator</th>
+            </thead>
+            <tbody>
+                @{
+                    foreach(var storefront in ViewBag.AllStorefronts)
+                    {
+                        <tr>
+                            <td><a href="/storefronts/@storefront.StorefrontId">@storefront.Title</a></td>
+                            <td>@storefront.Description</td>
+                            <td>@storefront.Owner.UserName</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

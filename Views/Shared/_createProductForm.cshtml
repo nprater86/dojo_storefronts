@@ -1,0 +1,34 @@
+@model Product;
+
+<form asp-action="SaveProduct" asp-controller="Product">
+    <div class="row mb-3">
+        <label class="form-label" asp-for="Name">Product Name:</label>
+        <div class="input-group">
+            <input class="form-control" asp-for="Name">
+        </div>
+        <small><span class="text-danger" asp-validation-for="Name"></span></small>
+    </div>
+    <div class="row mb-3">
+        <label class="form-label" asp-for="Description">Product Description:</label>
+        <div class="input-group">
+            <textarea class="form-control" style="resize:none;" asp-for="Description" rows=5></textarea>
+        </div>
+        <small><span class="text-danger" asp-validation-for="Description"></span></small>
+    </div>
+    <div class="row mb-3">
+        <label class="form-label" asp-for="Price">Price:</label>
+        <div class="input-group">
+            <div class="input-group-text">$</div>
+            <input type="number" class="form-control" asp-for="Price" step="0.01">
+        </div>
+        <small><span class="text-danger" asp-validation-for="Price"></span></small>
+    </div>
+    <div class="row mb-3">
+        <label class="form-label" asp-for="Quantity">Quantity:</label>
+        <div class="input-group">
+            <input class="form-control" asp-for="Quantity" step="1">
+        </div>
+        <small><span class="text-danger" asp-validation-for="Quantity"></span></small>
+    </div>
+    <input class="btn btn-secondary" type="submit" value="Add Product">
+</form>

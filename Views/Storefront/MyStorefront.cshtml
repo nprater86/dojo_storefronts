@@ -1,0 +1,76 @@
+@{
+    ViewData["Title"] = "My Storefront";
+}
+
+@{
+    if(ViewBag.StoreFront == null)
+    {
+        <h1 class="display-4 mt-5">You haven't created a storefront!</h1>
+        <a asp-action="Create" asp-controller="Storefront"><p>Would you like to create one?</p></a>
+    }
+    else
+    {
+        <div class="row mt-5 gap-5">
+            <div class="col-2">
+                <h6>Add a Product:</h6>
+                <partial name="_createProductForm" />
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <a href="/storefronts/@ViewBag.StoreFront.StorefrontId/edit">Edit</a>
+                </div>
+                <div class="row gap-5">
+                    <div class="col-4">
+                        <p class="display-6">Storefront Title:</p>
+                    </div>
+                    <div class="col-7">
+                        <p class="display-6">@ViewBag.Storefront.Title</p>
+                    </div>
+                </div>
+                <div class="row gap-5">
+                    <div class="col-4">
+                        <p>Storefront Description:</p>
+                    </div>
+                    <div class="col-7">
+                        <p>@ViewBag.Storefront.Description</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <p class="mb-3">Products:</p>
+                    @{
+                        if(ViewBag.Storefront.Inventory.Count == 0)
+                        {
+                            <p>You haven't added any products yet.</p>
+                        }
+                        else
+                        {
+                            <table class="table table-striped">
+                                <thead>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th style="width: 125px">Actions</th>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        foreach(var product in ViewBag.StoreFront.Inventory)
+                                        {
+                                            <tr>
+                                                <td style="vertical-align: middle;">@product.Name</td>
+                                                <td>@product.Description</td>
+                                                <td style="vertical-align: middle;" class="text-end">$@product.Price.ToString("#.##")</td>
+                                                <td style="vertical-align: middle;" class="text-end">@product.Quantity</td>
+                                                <td style="vertical-align: middle;"><a href="/products/@product.ProductId/edit">Edit</a> | <a href="/products/@product.ProductId/delete">Delete</a></td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    }
+}
