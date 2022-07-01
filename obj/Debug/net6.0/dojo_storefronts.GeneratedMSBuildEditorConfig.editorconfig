@@ -15,6 +15,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = c:\Users\nprat\OneDrive\Documents\Coding_Dojo\Assignments\Projects\dojo_storefronts
 build_property._RazorSourceGeneratorDebug = 
 
+[c:/Users/nprat/OneDrive/Documents/Coding_Dojo/Assignments/Projects/dojo_storefronts/Views/Cart/Checkout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxDaGVja291dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [c:/Users/nprat/OneDrive/Documents/Coding_Dojo/Assignments/Projects/dojo_storefronts/Views/Cart/UserCart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FydFxVc2VyQ2FydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -25,6 +29,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [c:/Users/nprat/OneDrive/Documents/Coding_Dojo/Assignments/Projects/dojo_storefronts/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/nprat/OneDrive/Documents/Coding_Dojo/Assignments/Projects/dojo_storefronts/Views/Home/ViewOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxWaWV3T3JkZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/nprat/OneDrive/Documents/Coding_Dojo/Assignments/Projects/dojo_storefronts/Views/Payment/AddPayment.cshtml]
@@ -73,6 +81,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [c:/Users/nprat/OneDrive/Documents/Coding_Dojo/Assignments/Projects/dojo_storefronts/Views/Storefront/EditStorefront.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcmVmcm9udFxFZGl0U3RvcmVmcm9udC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/nprat/OneDrive/Documents/Coding_Dojo/Assignments/Projects/dojo_storefronts/Views/Storefront/ManageOrder.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcmVmcm9udFxNYW5hZ2VPcmRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[c:/Users/nprat/OneDrive/Documents/Coding_Dojo/Assignments/Projects/dojo_storefronts/Views/Storefront/ManageOrders.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvcmVmcm9udFxNYW5hZ2VPcmRlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [c:/Users/nprat/OneDrive/Documents/Coding_Dojo/Assignments/Projects/dojo_storefronts/Views/Storefront/MyStorefront.cshtml]

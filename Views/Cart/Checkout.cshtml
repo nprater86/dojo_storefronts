@@ -1,0 +1,98 @@
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+@model SubmittedOrder;
+
+<h1 class="display-4 mt-5 mb-5">Checkout:</h1>
+
+<form asp-action="SubmitOrder" asp-controller="Order">
+    <div class="w-50 m-auto d-flex flex-column gap-3">
+        <div class="row">
+            <div class="col-3">
+                <label class="col-form-label" asp-for="ShippingAddressId">Shipping Address:</label>
+            </div>
+            @{
+                if(ViewBag.User.UserAddresses.Count == 0)
+                {
+                    <p>You don' thave any shipping addresses. <a asp-action="Account" asp-controller="User">Add Shipping Address.</a></p>
+                }
+                else
+                {
+                    <div class="col-5">
+                        <select asp-for="ShippingAddressId" class="form-select">
+                            @{
+                                foreach(var address in ViewBag.User.UserAddresses)
+                                {
+                                    <option value="@address.ShippingAddressId">@address.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                }
+            }
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <label class="col-form-label" asp-for="ShippingAddressId">Payment Method:</label>
+            </div>
+                @{
+                    if(ViewBag.User.UserPayments.Count == 0)
+                    {
+                        <p>You don't have any payment methods. <a asp-action="Account" asp-controller="User">Add Payment Method.</a></p>
+                    }
+                    else
+                    {
+                        <div class="col-5">
+                            <select asp-for="PaymentId" class="form-select">
+                                @{
+                                    foreach(var payment in ViewBag.User.UserPayments)
+                                    {
+                                        <option value="@payment.PaymentId">@payment.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    }
+                }
+                
+        </div>
+        <h1 class="display-6 mt-3 mb-3">Review Order:</h1>
+        @{
+            decimal sum = 0;
+
+            foreach(var product in ViewBag.User.Cart)
+            {
+                sum += product.OrderedQuantity * product.Product.Price;
+                <div class="row border rounded p-2 align-items-center justify-content-evenly">
+                    <div class="col-2">
+                        <img class="img-thumbnail" style="width: 75px; height: auto;" src="~/images/No_image_available.png">
+                    </div>
+                    <div class="col-4">
+                        <p><a href="/products/@product.Product.ProductId">@product.Product.Name</a></p>
+                    </div>
+                    <div class="col-2">
+                        <p>Qty: @product.OrderedQuantity</p>
+                    </div>
+                    <div class="col-2">
+                        <p>$@((product.Product.Price * product.OrderedQuantity).ToString("#.##"))</p>
+                    </div>
+                </div>
+            }
+            <div class="row p-2 justify-content-end align-items-center">
+                <div class="col-auto">
+                    <p><strong>Total: $@sum.ToString("#.##")</strong></p>
+                </div>
+                <div class="col-auto">
+                    @{
+                        if(ViewBag.User.UserAddresses.Count > 0 && ViewBag.User.UserPayments.Count > 0)
+                        {
+                            <input class="btn btn-success" type="submit" id="submitCart">
+                        }
+                    }
+                    <a class="btn btn-danger" asp-action="UserCart" asp-controller="Cart">Cancel</a>
+                </div>
+            </div>
+        }
+    </div>
+</form>

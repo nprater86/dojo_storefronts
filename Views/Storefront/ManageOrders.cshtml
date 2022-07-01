@@ -1,13 +1,20 @@
 @using Microsoft.AspNetCore.Http;
 
 @{
-    ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "Order Management";
 }
 
-<h1 class="display-4 mt-5 mb-5">Hello, @ViewBag.User.UserName!</h1>
+<div class="row mt-5 mb-5">
+    <div class="col-10">
+        <h1 class="display-4">@ViewBag.StoreFront.Title Order Management</h1>
+    </div>
+    <div class="col-2">
+        <a asp-action="MyStorefront" asp-controller="Storefront">Back to Store</a>
+    </div>
+</div>
 <h1 class="display-6 mb-3">Active Orders:</h1>
 @{
-    if(ViewBag.CurrentOrders.Count == 0)
+    if(ViewBag.ActiveOrders.Count == 0)
     {
         <p class="mb-3">You don't have any active orders.</p>
     }
@@ -24,20 +31,18 @@
             </thead>
         <tbody>
             @{
-                foreach(var order in ViewBag.CurrentOrders)
+                foreach(var order in ViewBag.ActiveOrders)
                 {
                     decimal orderTotal = 0;
-                    int numOfProd = 0;
                     foreach(var piso in order.Products)
                     {
                         orderTotal += piso.Product.Price;
-                        numOfProd += piso.OrderedQuantity;
                     }
                     <tr>
-                        <td><a href="/dashboard/order/@order.SubmittedOrderId">@order.SubmittedOrderId</a></td>
+                        <td><a href="/storefronts/mystorefront/manageorders/@order.SubmittedOrderId">@order.SubmittedOrderId</a></td>
                         <td>@order.CreatedAt.ToString("MM/dd/yyyy")</td>
                         <td>@order.Storefront.Title</td>
-                        <td>@numOfProd</td>
+                        <td>@order.Products.Count</td>
                         <td>$@orderTotal.ToString("#.##")</td>
                         <td>@order.Status</td>
                     </tr>
@@ -47,11 +52,11 @@
         </table>
     }
 }
-<h1 class="display-6 mb-3">Order History:</h1>
+<h1 class="display-6 mb-3">Completed Orders:</h1>
 @{
     if(ViewBag.CompletedOrders.Count == 0)
     {
-        <p class="mb-3">You don't have any order history.</p>
+        <p class="mb-3">You don't have any completed orders.</p>
     }
     else
     {
@@ -69,18 +74,15 @@
                 foreach(var order in ViewBag.CompletedOrders)
                 {
                     decimal orderTotal = 0;
-                    int numOfProd = 0;
                     foreach(var piso in order.Products)
                     {
                         orderTotal += piso.Product.Price;
-                        numOfProd += piso.OrderedQuantity;
                     }
-                    
                     <tr>
-                        <td><a href="/dashboard/order/@order.SubmittedOrderId">@order.SubmittedOrderId</a></td>
+                        <td><a href="/storefronts/mystorefront/manageorders/@order.SubmittedOrderId">@order.SubmittedOrderId</a></td>
                         <td>@order.CreatedAt.ToString("MM/dd/yyyy")</td>
                         <td>@order.Storefront.Title</td>
-                        <td>@numOfProd</td>
+                        <td>@order.Products.Count</td>
                         <td>$@orderTotal.ToString("#.##")</td>
                         <td>@order.Status</td>
                     </tr>

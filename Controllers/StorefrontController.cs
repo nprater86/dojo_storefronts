@@ -31,6 +31,7 @@ public class StorefrontController : Controller
             .FirstOrDefault(s => s.UserId == UserId);
 
             ViewBag.StoreFront = storeInDb;
+            ViewBag.ActiveOrders = storeInDb.SubmittedOrders.Where(s => s.Status != "Complete").ToList();
             return View();
         }
         else
@@ -146,5 +147,60 @@ public class StorefrontController : Controller
         _context.SaveChanges();
 
         return RedirectToAction("MyStorefront");
+    }
+
+    [HttpGet("storefronts/mystorefront/manageorders")]
+    public IActionResult ManageOrders()
+    {
+        if(HttpContext.Session.GetInt32("UserId") != null)
+        {
+            int UserId = (int)HttpContext.Session.GetInt32("UserId");
+
+            Storefront storeInDb = _context.Storefronts
+            .Include(s => s.Inventory)
+            .Include(s => s.SubmittedOrders)
+            .ThenInclude(so => so.Products)
+            .ThenInclude(p => p.Product)
+            .FirstOrDefault(s => s.UserId == UserId);
+
+            ViewBag.StoreFront = storeInDb;
+            ViewBag.ActiveOrders = storeInDb.SubmittedOrders.Where(s => s.Status != "Complete").ToList();
+            ViewBag.CompletedOrders = storeInDb.SubmittedOrders.Where(s => s.Status == "Complete").ToList();
+
+            return View();
+        }
+        else
+        {
+            return RedirectToAction("Index","Home");
+        }
+    }
+
+    [HttpGet("storefronts/mystorefront/manageorders/{SubmittedOrderId}")]
+    public IActionResult ManageOrder(int SubmittedOrderId)
+    {
+        if(HttpContext.Session.GetInt32("UserId") != null)
+        {
+            SubmittedOrder order = _context.SubmittedOrders
+            .Include(o => o.Products)
+            .ThenInclude(p => p.Product)
+            .Include(o => o.Storefront)
+            .Include(o => o.Payment)
+            .Include(o => o.ShippingAddress)
+            .FirstOrDefault(o => o.SubmittedOrderId == SubmittedOrderId);
+
+            if(order.Storefront.UserId == HttpContext.Session.GetInt32("UserId"))
+            {
+
+                return View(order);
+            }
+            else
+            {
+                return RedirectToAction("ManageOrders");
+            }
+        }
+        else
+        {
+            return RedirectToAction("Index","Home");
+        }
     }
 }

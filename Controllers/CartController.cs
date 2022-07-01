@@ -26,6 +26,7 @@ public class CartController : Controller
             User user = _context.Users
             .Include(u => u.Cart)
             .ThenInclude(pic => pic.Product)
+            .ThenInclude(p => p.HomeStorefront)
             .FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("UserId"));
             ViewBag.User = user;
 
@@ -138,6 +139,27 @@ public class CartController : Controller
             {
                 return RedirectToAction("UserCart");
             }
+        }
+        else
+        {
+            return RedirectToAction("Index","Home");
+        }
+    }
+
+    [HttpGet("cart/checkout")]
+    public IActionResult Checkout()
+    {
+        if(HttpContext.Session.GetInt32("UserId") != null)
+        {
+            User user = _context.Users
+            .Include(u => u.Cart)
+            .ThenInclude(pic => pic.Product)
+            .Include(u => u.UserAddresses)
+            .Include(u => u.UserPayments)
+            .FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("UserId"));
+            ViewBag.User = user;
+
+            return View();
         }
         else
         {

@@ -17,13 +17,14 @@
             {
                 sum += product.OrderedQuantity * product.Product.Price;
                 <div class="row border rounded p-2 align-items-center justify-content-evenly">
-                    <div class="col-auto">
+                    <div class="col-2">
                         <img class="img-thumbnail" style="width: 75px; height: auto;" src="~/images/No_image_available.png">
                     </div>
-                    <div class="col-auto">
+                    <div class="col-3">
                         <p><a href="/products/@product.Product.ProductId">@product.Product.Name</a></p>
+                        <small><p class="text-muted">@product.Product.HomeStorefront.Title</p></small>
                     </div>
-                    <div class="col-auto">
+                    <div class="col-3">
                         <p>
                             @{
                                 if(product.OrderedQuantity > 1)
@@ -32,10 +33,10 @@
                                 }
                             } Qty: @product.OrderedQuantity  <a href="/cart/add/@product.Product.ProductId"><i class="fa-solid fa-plus"></i></a></p>
                     </div>
-                    <div class="col-auto">
+                    <div class="col-2">
                         <p>$@((product.Product.Price * product.OrderedQuantity).ToString("#.##"))</p>
                     </div>
-                    <div class="col-auto">
+                    <div class="col-2">
                         <a href="/cart/remove/@product.ProductsInCartId">Remove</a>
                     </div>
                 </div>
@@ -45,7 +46,7 @@
                     <p><strong>Total: $@sum.ToString("#.##")</strong></p>
                 </div>
                 <div class="col-auto">
-                    <a class="btn btn-secondary" href="#">Checkout</a>
+                    <a class="btn btn-secondary" asp-action="Checkout" asp-controller="Cart">Checkout</a>
                 </div>
             </div>
         }

@@ -8,6 +8,9 @@ namespace dojo_storefronts.Models
     {
         [Key]
         public int SubmittedOrderId {get; set;}
+        public string Status {get; set;}
+        public string? Carrier {get; set;} = null;
+        public string? TrackingNumber {get; set;} = null;
         public DateTime CreatedAt {get; set;} = DateTime.Now;
         public DateTime UpdatedAt {get; set;} = DateTime.Now;
         public int StorefrontId {get; set;}

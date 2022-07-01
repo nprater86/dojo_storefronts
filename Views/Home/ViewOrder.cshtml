@@ -1,0 +1,88 @@
+@using Microsoft.AspNetCore.Http;
+@model SubmittedOrder;
+
+@{
+    ViewData["Title"] = $"View Order {Model.SubmittedOrderId}";
+}
+
+
+
+<div class="row mt-5 mb-5 justify-content-between align-items-center">
+    <div class="col-auto">
+        <h1 class="display-4">Order#: @Model.SubmittedOrderId</h1>
+        <h1 class="display-6">Storefront: @Model.Storefront.Title</h1>
+        <h1 class="display-6">Seller: @Model.Storefront.Owner.UserName</h1>
+    </div>
+    <div class="col-auto"><a asp-action="Dashboard" asp-controller="Home">Back to Orders</a></div>
+</div>
+<div class="row mb-3">
+    <div class="col-2">
+        <p>Order Status: @Model.Status</p>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-2">
+        <p>Shipping Details:</p>
+    </div>
+    <div class="col-auto">
+        <p>Carrier: @Model.Carrier</p>
+        <p>Tracking Number: @Model.TrackingNumber</p>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-2">
+        <h6>Address:</h6>
+        <div class="border rounded p-2">
+            <p>@Model.ShippingAddress.NameOnPackage</p>
+            <p>@Model.ShippingAddress.Address1</p>
+            @{
+                if(Model.ShippingAddress.Address2 != null)
+                {
+                    <p>@Model.ShippingAddress.Address2</p>
+                }
+            }
+            <p>@Model.ShippingAddress.City, @Model.ShippingAddress.State @Model.ShippingAddress.Zipcode</p>
+        </div>
+    </div>
+    <div class="col-2">
+        <h6>Payment Method:</h6>
+        <div class="border rounded p-2">
+            <p>@Model.Payment.NameOnCard</p>
+            <p>@Model.Payment.Company</p>
+            <p>@Model.Payment.Number</p>
+            <p>Exp: @Model.Payment.Expiration.ToString("MM/yy") | Zip: @Model.Payment.Zipcode</p>
+            <p>CVV: @Model.Payment.CVV</p>
+        </div>
+    </div>
+    <div class="col-2">
+        <h6>Billing Total:</h6>
+        <div class="border rounded p-2">
+            <p>$@Model.Products.Sum(p => p.Product.Price).ToString("#.##")</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <h5>Products:</h5>
+    <table class="table table-striped">
+        <thead>
+            <th>ID</th>
+            <th>Product Name</th>
+            <th>Qty</th>
+            <th>Price</th>
+        </thead>
+        <tbody>
+            @{
+                decimal sum = 0;
+                foreach(var product in @Model.Products)
+                {
+                    <tr>
+                        <td>@product.Product.ProductId</td>
+                        <td>@product.Product.Name</td>
+                        <td>@product.OrderedQuantity</td>
+                        <td>$@((product.OrderedQuantity*product.Product.Price).ToString("#.##"))</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

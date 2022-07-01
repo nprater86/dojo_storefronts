@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Dojo Storefronts</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/dojo_storefronts.styles.css" asp-append-version="true" />
@@ -17,15 +17,15 @@
             int numCartItems = (int)Context.Session.GetInt32("NumCartItems");
 
             <header>
-                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="height: 75px;">
                     <div class="container-fluid">
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Dojo Storefronts</a>
+                        <a style="font-size: 25px;" class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-store" style="font-size: 50px;"></i><span>Dojo Storefronts</span></a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
-                            <ul class="navbar-nav flex-grow-1">
+                            <ul class="navbar-nav flex-grow-1 gap-3">
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-action="Dashboard" asp-controller="Home">Home</a>
                                 </li>
@@ -36,8 +36,8 @@
                                     <a class="nav-link text-dark" asp-action="MyStorefront" asp-controller="Storefront">My Storefront</a>
                                 </li>
                             </ul>
-                            <div class="d-flex align-items-center gap-5">
-                                <ul class="navbar-nav">
+                            <div class="d-flex align-items-center">
+                                <ul class="navbar-nav gap-3">
                                     <li class="nav-item">
                                         <a class="nav-link text-dark" asp-controller="Cart" asp-action="UserCart">Cart(@numCartItems)</a>
                                     </li>
